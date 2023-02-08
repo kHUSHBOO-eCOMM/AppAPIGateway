@@ -8,7 +8,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -16,12 +18,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     private Environment environment;
     private UserService userService;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private PasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public WebSecurity(Environment environment,
                        UserService userService,
-                       BCryptPasswordEncoder bCryptPasswordEncoder) {
+                       PasswordEncoder bCryptPasswordEncoder) {
         this.environment = environment;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.userService = userService;
@@ -30,11 +32,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable();
-        httpSecurity.authorizeRequests().antMatchers("/**")
-                .hasIpAddress(environment.getProperty("gateway.ip"))
+//        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry re = httpSecurity.authorizeRequests();
+        httpSecurity.authorizeRequests()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/**").permitAll()
+//                .hasIpAddress(environment.getProperty("gateway.ip"))
                 .and()
                 .addFilter(getAuthenticationFilter());
-
         httpSecurity.headers().frameOptions().disable();
     }
 

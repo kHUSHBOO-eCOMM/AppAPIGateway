@@ -5,7 +5,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class UsersRequestModel {
+public class CreateUsersRequestModel {
 
     @NotNull(message = "FirstName cannot be null")
     @Size(min = 2, message = "First name can not be less than 2 char")

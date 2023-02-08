@@ -1,13 +1,14 @@
 package com.app.accout.management.service.dto;
 
-import java.io.Serial;
+import com.app.accout.management.service.model.AlbumResponseModel;
+
 import java.io.Serializable;
+import java.util.List;
 
 public class UserDto implements Serializable {
 
 
-    @Serial
-    private static final long serialVersionUID = -5121129507771116592L;
+//    private static final long serialVersionUID = -5121129507771116592L;
 
     private String userId;
     private String firstName;
@@ -15,6 +16,8 @@ public class UserDto implements Serializable {
     private String password;
     private String email;
     private String encryptedPassword;
+
+    private List<AlbumResponseModel> albums;
 
     public String getUserId() {
         return userId;
@@ -62,5 +65,13 @@ public class UserDto implements Serializable {
 
     public void setEncryptedPassword(String encryptedPassword) {
         this.encryptedPassword = encryptedPassword;
+    }
+
+    public List<AlbumResponseModel> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(List<AlbumResponseModel> albums) {
+        this.albums = albums;
     }
 }

@@ -1,15 +1,12 @@
 package com.app.accout.management.service.data;
 
-import javax.annotation.processing.Generated;
 import javax.persistence.*;
-import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "Users")
 public class UserEntity implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 3221374389558330636L;
 
     @Id
@@ -22,7 +19,7 @@ public class UserEntity implements Serializable {
     private String firstName;
     @Column(nullable = false, length = 50)
     private String lastName;
-    @Column(nullable = false, length = 100, unique = true)
+    @Column(nullable = false, length = 200, unique = true)
     private String email;
     @Column(nullable = false)
     private String encryptedPassword;
